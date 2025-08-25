@@ -64,6 +64,10 @@ export async function purchaseCredits(packId: PackId) {
     throw new Error("Unauthenticated");
   }
 
+  if (!stripe) {
+    throw new Error("Stripe is not configured");
+  }
+
   const seletedPack = getCreditsPack(packId);
 
   if (!seletedPack) {
@@ -122,6 +126,10 @@ export async function downloadInvoice(id: string) {
 
   if (!userId) {
     throw new Error("Unauthenticated");
+  }
+
+  if (!stripe) {
+    throw new Error("Stripe is not configured");
   }
 
   const purchase = await prisma.userPurchase.findUnique({
