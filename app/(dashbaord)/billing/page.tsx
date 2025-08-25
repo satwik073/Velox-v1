@@ -17,6 +17,10 @@ import { getCreditsUsageInPeriod } from "@/actions/analytics";
 import CreditUsageChart from "./_components/CreditUsageChart";
 import InvoiceButton from "./_components/InvoiceButton";
 
+// Disable prerendering and caching to prevent build-time data collection
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 function BillingPage() {
   return (
     <div className="mx-auto p-4 space-y-8">
