@@ -3,13 +3,10 @@ import { stripe } from "@/lib/stripe/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
-  // Check if required environment variables are set
-  if (!process.env.STRIPE_WEBHOOK_SECRET) {
-    console.error("STRIPE_WEBHOOK_SECRET is not set");
-    return new NextResponse("Webhook secret not configured", { status: 500 });
-  }
+// Force dynamic rendering to avoid build-time issues
+export const dynamic = 'force-dynamic';
 
+export async function POST(request: Request) {
   const body = await request.text();
   const signatureHeaders = headers().get("stripe-signature");
 
@@ -18,11 +15,17 @@ export async function POST(request: Request) {
     return new NextResponse("Missing signature", { status: 400 });
   }
 
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!webhookSecret) {
+    console.error("STRIPE_WEBHOOK_SECRET is not set");
+    return new NextResponse("Webhook secret not configured", { status: 500 });
+  }
+
   try {
     const event = stripe.webhooks.constructEvent(
       body,
       signatureHeaders,
-      process.env.STRIPE_WEBHOOK_SECRET
+      webhookSecret
     );
 
     switch (event.type) {
