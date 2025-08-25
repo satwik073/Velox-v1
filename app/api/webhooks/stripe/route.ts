@@ -1,12 +1,16 @@
-import { handleCheckoutSessionCompleted } from "@/lib/stripe/handleCheckoutSessionCompleted";
-import { stripe } from "@/lib/stripe/stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
 // Force dynamic rendering to avoid build-time issues
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 
 export async function POST(request: Request) {
+  // Dynamic imports to avoid build-time evaluation
+  const { handleCheckoutSessionCompleted } = await import("@/lib/stripe/handleCheckoutSessionCompleted");
+  const { stripe } = await import("@/lib/stripe/stripe");
+
   const body = await request.text();
   const signatureHeaders = headers().get("stripe-signature");
 
@@ -22,6 +26,11 @@ export async function POST(request: Request) {
   }
 
   try {
+    if (!stripe) {
+      console.error("Stripe is not configured");
+      return new NextResponse("Stripe not configured", { status: 500 });
+    }
+
     const event = stripe.webhooks.constructEvent(
       body,
       signatureHeaders,
