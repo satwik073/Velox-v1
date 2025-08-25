@@ -12,6 +12,9 @@ import parser from "cron-parser";
 
 // Force dynamic rendering to avoid build-time issues
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
