@@ -6,6 +6,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Bell } from "lucide-react";
 
 export default function NotificationsPage() {
+  // Skip during production build
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2">

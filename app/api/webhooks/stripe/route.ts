@@ -8,6 +8,10 @@ export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
 export async function POST(request: Request) {
+  // Skip during production build to avoid page data collection
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return new NextResponse(null, { status: 200 });
+  }
   // Dynamic imports to avoid build-time evaluation
   const { handleCheckoutSessionCompleted } = await import("@/lib/stripe/handleCheckoutSessionCompleted");
   const { stripe } = await import("@/lib/stripe/stripe");

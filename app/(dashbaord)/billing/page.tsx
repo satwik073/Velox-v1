@@ -22,6 +22,11 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 function BillingPage() {
+  // Skip during production build
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <div className="mx-auto p-4 space-y-8">
       <h1 className="text-3xl font-bold">Billing</h1>

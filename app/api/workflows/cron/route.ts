@@ -10,6 +10,10 @@ export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
 export async function GET(request: NextRequest) {
+  // Skip logic during production build to prevent data collection
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return Response.json({ skipped: true }, { status: 200 });
+  }
   try {
     const now = new Date();
 

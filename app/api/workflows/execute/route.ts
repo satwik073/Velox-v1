@@ -17,6 +17,10 @@ export const revalidate = 0;
 export const fetchCache = 'force-no-store';
 
 export async function GET(request: Request) {
+  // Skip all logic during production build phase to avoid page data collection errors
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return new Response(null, { status: 200 });
+  }
   const authHeader = request.headers.get("authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });

@@ -15,6 +15,11 @@ import Link from "next/link";
 import Navbar from "./_components/Navbar";
 
 export default function HomeLandingPage() {
+  // Skip during production build
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <div className="flex flex-col min-h-screen gap-4 selection:bg-primary selection:text-white dark bg-[#0C0A09] ">
       <Navbar />

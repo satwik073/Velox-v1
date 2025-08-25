@@ -8,6 +8,11 @@ import { Badge } from "@/components/ui/badge";
 import { BarChart3, Download, TrendingUp, TrendingDown, Calendar } from "lucide-react";
 
 export default function ReportsPage() {
+  // Skip during production build
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">

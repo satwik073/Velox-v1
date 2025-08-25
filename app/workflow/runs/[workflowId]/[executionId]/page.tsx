@@ -12,6 +12,11 @@ function ExecutionViewerPage({
 }: {
   params: { executionId: string; workflowId: string };
 }) {
+  // Skip during production build
+  if (process.env.NEXT_PHASE === 'phase-production-build') {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <div className="flex flex-col h-screen w-full overflow-hidden">
       <Topbar
