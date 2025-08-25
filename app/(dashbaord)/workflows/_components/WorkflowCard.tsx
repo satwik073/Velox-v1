@@ -37,32 +37,37 @@ const statusColor = {
 function WorkflowCard({ workflow }: { workflow: Workflow }) {
   const isDraft = workflow.status === WorkflowStatus.DRAFT;
   return (
-    <Card className="border border-separate shadow-sm rounded-lg overflow-hidden hover:shadow-md dark:shadow-primary/30 group/card">
-      <CardContent className="p-4 flex items-center justify-between h-[100px]">
-        <div className="flex items-center justify-end space-x-3">
+    <Card className="border border-border/50 bg-card  rounded-lg overflow-hidden hover:shadow-lg hover:border-primary/20 transition-all duration-200 group/card">
+      <CardContent className="p-5 flex items-center justify-between h-[110px]">
+        <div className="flex items-center space-x-4">
           <div
             className={cn(
-              "w-10 h-10 rounded-full flex items-center justify-center",
-              statusColor[workflow.status as WorkflowStatus]
+              "w-12 h-12 rounded-xl flex items-center justify-center  transition-all duration-200",
+              isDraft 
+                ? "bg-amber-50 text-amber-600 border border-amber-200" 
+                : "bg-primary/10 text-primary border border-primary/20"
             )}
           >
             {isDraft ? (
-              <FileTextIcon className="h-5 w-5 stroke-white" />
+              <FileTextIcon className="h-6 w-6" />
             ) : (
-              <PlayIcon className="h-5 w-5 stroke-white" />
+              <PlayIcon className="h-6 w-6" />
             )}
           </div>
-          <div>
-            <h3 className="text-base font-bold text-muted-foreground flex items-center">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-base font-semibold text-foreground flex items-center mb-1">
               <TooltipWrapper content={workflow.description!}>
-                <Link href={`/workflow/editor/${workflow.id}`}>
+                <Link 
+                  href={`/workflow/editor/${workflow.id}`}
+                  className="hover:text-primary transition-colors duration-200"
+                >
                   {workflow.name}
                 </Link>
               </TooltipWrapper>
               {isDraft && (
-                <span className="ml-2 px-2 py-0.5 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">
+                <Badge variant="secondary" className="ml-2 bg-amber-50 text-amber-700 border-amber-200 text-xs">
                   Draft
-                </span>
+                </Badge>
               )}
               <DuplicateWorkflowDialog
                 workflowId={workflow.id}
@@ -84,10 +89,10 @@ function WorkflowCard({ workflow }: { workflow: Workflow }) {
             href={`/workflow/editor/${workflow.id}`}
             className={cn(
               buttonVariants({ variant: "outline", size: "sm" }),
-              "flex items-center p-4"
+              "flex items-center px-3 py-2 hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
             )}
           >
-            <ShuffleIcon size={16} />
+            <ShuffleIcon size={16} className="mr-2" />
             Edit
           </Link>
           <WorkflowActions
@@ -116,7 +121,7 @@ function SchedulerSection({
 }) {
   if (isDraft) return null;
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3">
       <CornerDownRightIcon className="h-4 w-4 text-muted-foreground" />
       <SchedulerDialog
         workflowId={workflowId}
@@ -126,15 +131,13 @@ function SchedulerSection({
       />
       <MoveRightIcon className="h-4 w-4 text-muted-foreground" />
       <TooltipWrapper content="Credits consumption for full run">
-        <div className="flex items-center gap-3">
-          <Badge
-            variant={"outline"}
-            className="space-x-2 text-muted-foreground rounded-sm"
-          >
-            <CoinsIcon className="h-4 w-4" />
-            <span className="text-sm">{creditsCost}</span>
-          </Badge>
-        </div>
+        <Badge
+          variant={"outline"}
+          className="bg-muted/50 border-border/50 text-muted-foreground rounded-md px-2 py-1"
+        >
+          <CoinsIcon className="h-3 w-3 mr-1.5" />
+          <span className="text-xs font-medium">{creditsCost}</span>
+        </Badge>
       </TooltipWrapper>
     </div>
   );
@@ -154,34 +157,40 @@ function LastRunDetails({ workflow }: { workflow: Workflow }) {
     nextRunAt && formatInTimeZone(nextRunAt, "UTC", "HH:mm");
 
   return (
-    <div className="bg-primary/5 px-4 py-1 flex justify-between items-center text-muted-foreground">
-      <div className="flex items-center text-sm gap-2">
-        {lastRunAt && (
-          <Link
-            href={`/workflow/runs/${workflow.id}/${lastRunId}`}
-            className="flex items-center text-sm gap-2 group"
-          >
-            <span>Last run:</span>
-            <ExecutionStatusIndicator
-              status={lastRunStatus as WorkflowExecutionStatus}
-            />
-            <ExecutionStatusLabel
-              status={lastRunStatus as WorkflowExecutionStatus}
-            />
-            <span>{formattedStartedAt}</span>
-            <ChevronRightIcon
-              size={14}
-              className="-translate-x-[2px] group-hover:translate-x-0 transition"
-            />
-          </Link>
-        )}
-        {!lastRunAt && <p>No runs yet</p>}
+    <div className="bg-gradient-to-r from-primary/5 to-primary/10 px-5 py-2 border-t border-border/50">
+      <div className="flex items-center justify-between text-sm">
+        <div className="flex items-center gap-3">
+          {lastRunAt ? (
+            <Link
+              href={`/workflow/runs/${workflow.id}/${lastRunId}`}
+              className="flex items-center gap-2 group hover:text-primary transition-colors duration-200"
+            >
+              <span className="text-muted-foreground">Last run:</span>
+              <ExecutionStatusIndicator
+                status={lastRunStatus as WorkflowExecutionStatus}
+              />
+              <ExecutionStatusLabel
+                status={lastRunStatus as WorkflowExecutionStatus}
+              />
+              <span className="font-medium">{formattedStartedAt}</span>
+              <ChevronRightIcon
+                size={14}
+                className="text-muted-foreground group-hover:text-primary -translate-x-[2px] group-hover:translate-x-0 transition-all duration-200"
+              />
+            </Link>
+          ) : (
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <span>No runs yet</span>
+            </div>
+          )}
+        </div>
+        
         {nextRunAt && (
-          <div className="flex items-center text-sm gap-2">
-            <ClockIcon size={12} />
-            <span>Next run at:</span>
-            <span>{nextSchedule}</span>
-            <span className="text-sm">({nextScheduleUtc} UTC)</span>
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <ClockIcon size={14} />
+            <span>Next:</span>
+            <span className="font-medium">{nextSchedule}</span>
+            <span className="text-xs opacity-75">({nextScheduleUtc} UTC)</span>
           </div>
         )}
       </div>

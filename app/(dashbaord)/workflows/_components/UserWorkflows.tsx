@@ -1,24 +1,52 @@
+"use client";
+
 import { getWorkflowsForUser } from "@/actions/workflows";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { AlertCircle, InboxIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import CreateWorkflowDialog from "./CreateWorkflowDialog";
+import WorkflowsTable from "./WorkflowsTable";
 import WorkflowCard from "./WorkflowCard";
+import ViewToggle from "./ViewToggle";
+import { Workflow } from "@prisma/client";
+import UserWorkflowSkeleton from "./UserWorkflowSkeleton";
 
-async function UserWorkflows() {
-  const workflows = await getWorkflowsForUser();
-  if (!workflows) {
+function UserWorkflows() {
+  const [workflows, setWorkflows] = useState<Workflow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [view, setView] = useState<"table" | "card">("table");
+
+  useEffect(() => {
+    async function fetchWorkflows() {
+      try {
+        const data = await getWorkflowsForUser();
+        setWorkflows(data || []);
+      } catch (err) {
+        setError("Failed to fetch workflows");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchWorkflows();
+  }, []);
+  if (loading) {
+    return <UserWorkflowSkeleton />;
+  }
+
+  if (error) {
     return (
       <Alert variant="destructive">
         <AlertCircle className="h-4 w-4" />
         <AlertTitle>Error</AlertTitle>
         <AlertDescription>
-          Something went wrong. Please try again later
+          {error}
         </AlertDescription>
       </Alert>
     );
   }
+
   if (workflows.length === 0) {
     return (
       <div className="flex flex-col gap-4 h-full items-center">
@@ -35,11 +63,22 @@ async function UserWorkflows() {
       </div>
     );
   }
+
   return (
-    <div className="grid grid-cols-1 gap-4">
-      {workflows.map((workflow) => (
-        <WorkflowCard workflow={workflow} key={workflow.id} />
-      ))}
+    <div className="space-y-4">
+      <div className="flex justify-end">
+        <ViewToggle view={view} onViewChange={setView} />
+      </div>
+      
+      {view === "table" ? (
+        <WorkflowsTable workflows={workflows} />
+      ) : (
+        <div className="grid grid-cols-1 gap-4">
+          {workflows.map((workflow) => (
+            <WorkflowCard workflow={workflow} key={workflow.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

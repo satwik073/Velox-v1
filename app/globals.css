@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+
+.body {
+  font-family: 'DM Sans', sans-serif;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -30,8 +37,8 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 240 4.8% 95.9%;
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
@@ -42,10 +49,10 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
+    --ring: 217 91% 60%;
     --radius: 0.5rem;
-    --chart-1: 142 88% 28%;
-    --chart-2: 140 74% 44%;
+    --chart-1: 217 88% 60%;
+    --chart-2: 217 74% 60%;
   }
 
   .dark {
@@ -55,8 +62,8 @@
     --card-foreground: 0 0% 95%;
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 95%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 15%;
@@ -67,9 +74,9 @@
     --destructive-foreground: 0 85.7% 97.3%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 142.4 71.8% 29.2%;
-    --chart-1: 142 88% 28%;
-    --chart-2: 140 74% 44%;
+    --ring: 217 91% 60%;
+    --chart-1: 217 88% 60%;
+    --chart-2: 217 74% 60%;
   }
 }
 
@@ -82,6 +89,24 @@
   }
 }
 
+/* Custom background for right section */
+.bg-right-section {
+  background-color: #ffffff; /* Light theme background */
+}
+
+.dark .bg-right-section {
+  background-color: #1b1d21; /* Dark theme background */
+}
+
+/* Custom background for sidebar */
+.bg-sidebar {
+  background-color: #f8f9fa; /* Light theme background */
+}
+
+.dark .bg-sidebar {
+  background-color: #16181c; /* Dark theme background */
+}
+
 .react-flow__attribution {
   background: transparent !important;
 }
@@ -90,4 +115,28 @@
   .react-flow__controls-button {
     @apply !bg-accent;
   }
+}
+
+/* Shimmer animation for skeleton loaders */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Enhanced shimmer with better visibility */
+.shimmer {
+  background: linear-gradient(90deg, #f8f9fa 25%, #e9ecef 50%, #f8f9fa 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
+}
+
+/* Dark mode shimmer */
+.dark .shimmer {
+  background: linear-gradient(90deg, #1b1d21 25%, #2a2d32 50%, #1b1d21 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite ease-in-out;
 }

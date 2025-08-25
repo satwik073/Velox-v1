@@ -3,6 +3,18 @@ import {
   HomeIcon,
   Layers2Icon,
   ShieldCheckIcon,
+  Bell,
+  CheckSquare,
+  FileText,
+  Mail,
+  Video,
+  BarChart3,
+  Play,
+  Send,
+  Workflow,
+  Building2,
+  Users,
+  Plus,
 } from "lucide-react";
 
 export const routes = [
@@ -25,6 +37,73 @@ export const routes = [
     href: "/billing",
     label: "Billing",
     icon: CoinsIcon,
+  },
+];
+
+export const sidebarRoutes = [
+  {
+    href: "/notifications",
+    label: "Notifications",
+    icon: Bell,
+  },
+  {
+    href: "/tasks",
+    label: "Tasks",
+    icon: CheckSquare,
+  },
+  {
+    href: "/notes",
+    label: "Notes",
+    icon: FileText,
+  },
+  {
+    href: "/emails",
+    label: "Emails",
+    icon: Mail,
+  },
+  {
+    href: "/calls",
+    label: "Calls",
+    icon: Video,
+  },
+  {
+    href: "/reports",
+    label: "Reports",
+    icon: BarChart3,
+  },
+];
+
+export const automationRoutes = [
+  {
+    href: "/sequences",
+    label: "Sequences",
+    icon: Send,
+  },
+  {
+    href: "/workflows",
+    label: "Workflows",
+    icon: Workflow,
+  },
+];
+
+export const recordsRoutes = [
+  {
+    href: "/companies",
+    label: "Companies",
+    icon: Building2,
+  },
+  {
+    href: "/people",
+    label: "People",
+    icon: Users,
+  },
+];
+
+export const listsRoutes = [
+  {
+    href: "/lists",
+    label: "Lists",
+    icon: Plus,
   },
 ];
 

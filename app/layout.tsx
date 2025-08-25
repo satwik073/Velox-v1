@@ -2,10 +2,10 @@ import { AppProviders } from "@/components/providers/AppProviders";
 import { Toaster } from "@/components/ui/sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Flow srape",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: Readonly<{ 
   children: React.ReactNode;
 }>) {
   return (
@@ -26,12 +26,12 @@ export default function RootLayout({
       appearance={{
         elements: {
           formButtonPrimary:
-            "bg-primary hover:bg-primary/90 text-sm !shadow-none",
+            "bg-[#266DF0] hover:bg-[#266DF0]/90 text-sm !shadow-none",
         },
       }}
     >
       <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+        <body className={dmSans.className}>
           <AppProviders>{children}</AppProviders>
         </body>
         <Toaster richColors />

@@ -9,7 +9,7 @@ function layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen">
       <DesktopSidebar />
-      <div className="flex flex-col flex-1 max-h-screen">
+      <div className="flex flex-col flex-1 max-h-screen bg-right-section">
         <header className="flex items-center justify-between px-6 py-4 h-[50px] container">
           <BreadcrumbHeader />
           <div className="gap-2 flex items-center">
