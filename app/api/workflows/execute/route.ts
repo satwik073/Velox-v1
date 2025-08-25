@@ -10,6 +10,9 @@ import { TaskRegistry } from "@/lib/workflow/task/Registry";
 import { timingSafeEqual } from "crypto";
 import parser from "cron-parser";
 
+// Force dynamic rendering to avoid build-time issues
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
   const authHeader = request.headers.get("authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {

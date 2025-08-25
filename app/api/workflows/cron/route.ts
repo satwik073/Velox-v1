@@ -3,42 +3,63 @@ import prisma from "@/lib/prisma";
 import { WorkflowStatus } from "@/lib/types";
 import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
-  const now = new Date();
+// Force dynamic rendering to avoid build-time issues
+export const dynamic = 'force-dynamic';
 
-  const workflows = await prisma.workflow.findMany({
-    select: {
-      id: true,
-    },
-    where: {
-      status: WorkflowStatus.PUBLISHED,
-      cron: { not: null },
-      nextRunAt: {
-        lte: now,
+export async function GET(request: NextRequest) {
+  try {
+    const now = new Date();
+
+    const workflows = await prisma.workflow.findMany({
+      select: {
+        id: true,
       },
-    },
-  });
-  for (const workflow of workflows) {
-    triggerWorkflow(workflow.id);
+      where: {
+        status: WorkflowStatus.PUBLISHED,
+        cron: { not: null },
+        nextRunAt: {
+          lte: now,
+        },
+      },
+    });
+
+    for (const workflow of workflows) {
+      await triggerWorkflow(workflow.id);
+    }
+
+    return Response.json({ workflowsToRun: workflows.length }, { status: 200 });
+  } catch (error) {
+    console.error("Error in cron job:", error);
+    return Response.json({ error: "Internal server error" }, { status: 500 });
   }
-  return Response.json({ workflowsToRun: workflows.length }, { status: 200 });
 }
 
-function triggerWorkflow(wofkflowId: string) {
-  const triggerApiUrl = getAppUrl(
-    `api/workflows/execute?workflowId=${wofkflowId}`
-  );
-  fetch(triggerApiUrl, {
-    headers: {
-      Authorization: `Bearer ${process.env.API_SECRET!}`,
-    },
-    cache: "no-store",
-  }).catch((error: any) => {
+async function triggerWorkflow(workflowId: string) {
+  try {
+    const apiSecret = process.env.API_SECRET;
+    if (!apiSecret) {
+      console.error("API_SECRET is not configured");
+      return;
+    }
+
+    const triggerApiUrl = getAppUrl(`api/workflows/execute?workflowId=${workflowId}`);
+    
+    const response = await fetch(triggerApiUrl, {
+      headers: {
+        Authorization: `Bearer ${apiSecret}`,
+      },
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  } catch (error: any) {
     console.error(
       "Error triggering workflow with id",
-      wofkflowId,
+      workflowId,
       ":error->",
       error.message
     );
-  });
+  }
 }
