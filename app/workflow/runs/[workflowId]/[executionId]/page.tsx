@@ -1,3 +1,6 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
 import { getWorkflowExecutionWithPhases } from "@/actions/workflows";
 import Topbar from "@/app/workflow/_components/topbar/Topbar";
 import { Loader2Icon } from "lucide-react";
