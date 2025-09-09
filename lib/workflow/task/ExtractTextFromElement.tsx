@@ -1,11 +1,11 @@
 import { TaskParamType, TaskType, WorkflowTask } from "@/lib/types";
-import { LucideProps, TextIcon } from "lucide-react";
+import { LucideProps, FileText } from "lucide-react";
 
 export const ExtractTextFromElementTask = {
   type: TaskType.EXTRACT_TEXT_FROM_ELEMENT,
   label: "Extract text from element",
   icon: (props: LucideProps) => (
-    <TextIcon className="stroke-rose-400" {...props} />
+    <FileText className="stroke-cyan-400" {...props} />
   ),
   isEntryPoint: false,
   inputs: [

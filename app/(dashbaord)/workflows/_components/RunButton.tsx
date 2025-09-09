@@ -3,7 +3,7 @@
 import { runWorkflow } from "@/actions/runWorkflow";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
-import { PlayIcon } from "lucide-react";
+import { IconPlayerPlay } from "@tabler/icons-react";
 import { toast } from "sonner";
 
 function RunButton({ workflowId }: { workflowId: string }) {
@@ -19,9 +19,9 @@ function RunButton({ workflowId }: { workflowId: string }) {
 
   return (
     <Button
-      variant={"outline"}
-      size={"sm"}
-      className="flex items-center gap-2"
+      variant="ghost"
+      size="sm"
+      className="h-8 w-8 p-0 hover:bg-[#1a1d21] dark:hover:bg-[#1a1d21] hover:bg-muted/50 hover:text-[#F5E242] dark:hover:text-[#F5E242] hover:text-foreground text-[#eef1f5] dark:text-[#eef1f5] text-muted-foreground"
       onClick={() => {
         toast.success("Scheduling run...", { id: workflowId });
         mutation.mutate({
@@ -29,8 +29,7 @@ function RunButton({ workflowId }: { workflowId: string }) {
         });
       }}
     >
-      <PlayIcon size={16} />
-      Run
+      <IconPlayerPlay className="h-4 w-4" />
     </Button>
   );
 }

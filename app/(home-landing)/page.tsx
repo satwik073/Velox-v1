@@ -1,7 +1,4 @@
 "use client";
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-export const fetchCache = 'force-no-store';
 import { TypewriterEffectSmooth } from "@/components/accernity-ui/TypeWriterEffect";
 import { Button } from "@/components/ui/button";
 import { pricingPlans, typeWriterWords } from "@/lib/data";

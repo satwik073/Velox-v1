@@ -23,8 +23,8 @@ function SaveButton({ workflowId }: { workflowId: string }) {
 
   return (
     <Button
-      variant={"outline"}
-      className="flex items-center gap-2"
+      className="bg-[#266DF0] border-[1.5px] border-[#407bf2] text-[14px] font-normal py-2 px-4 h-[28px] rounded-[8px] flex items-center gap-2"
+      style={{padding: '4px 8px 4px 6px'}}
       onClick={() => {
         const workflowDef = JSON.stringify(toObject());
         toast.loading("Saving Workflow", { id: "save-workflow" });
@@ -35,7 +35,7 @@ function SaveButton({ workflowId }: { workflowId: string }) {
       }}
       disabled={saveMutation.isPending}
     >
-      <CheckIcon size={16} className="stroke-green-400" />
+      <CheckIcon size={16} className="stroke-white" />
       Save
     </Button>
   );

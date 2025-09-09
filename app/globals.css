@@ -98,6 +98,34 @@
   background-color: #1b1d21; /* Dark theme background */
 }
 
+/* Custom scrollbar styles for tags */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #4a4a4a;
+  border-radius: 2px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: #5a5a5a;
+}
+
+.scrollbar-track-transparent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 /* Custom background for sidebar */
 .bg-sidebar {
   background-color: #f8f9fa; /* Light theme background */

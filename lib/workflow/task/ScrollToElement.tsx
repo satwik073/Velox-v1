@@ -1,11 +1,11 @@
 import { TaskParamType, TaskType, WorkflowTask } from "@/lib/types";
-import { LucideProps, MouseIcon } from "lucide-react";
+import { LucideProps, Scroll } from "lucide-react";
 
 export const ScrollToElementTask = {
   type: TaskType.SCROLL_TO_ELEMENT,
   label: "Scroll to element",
   icon: (props: LucideProps) => (
-    <MouseIcon className="stroke-orange-400" {...props} />
+    <Scroll className="stroke-pink-400" {...props} />
   ),
   isEntryPoint: false,
   inputs: [

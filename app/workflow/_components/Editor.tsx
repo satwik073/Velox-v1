@@ -6,6 +6,7 @@ import { ReactFlowProvider } from "@xyflow/react";
 import FlowEditor from "./FlowEditor";
 import Topbar from "./topbar/Topbar";
 import TaskMenu from "./TaskMenu";
+import PublishWorkflowBanner from "./PublishWorkflowBanner";
 import { FlowValidationContextProvider } from "@/components/context/FlowValidationContext";
 import { WorkflowStatus } from "@/lib/types";
 

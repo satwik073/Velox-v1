@@ -1,11 +1,11 @@
 import { TaskParamType, TaskType, WorkflowTask } from "@/lib/types";
-import { LucideProps, SendIcon } from "lucide-react";
+import { LucideProps, Zap } from "lucide-react";
 
 export const DeliverViaWebHookTask = {
   type: TaskType.DELIVER_VIA_WEBHOOK,
   label: "Deliver via Webhook",
   icon: (props: LucideProps) => (
-    <SendIcon className="stroke-blue-400" {...props} />
+    <Zap className="stroke-red-400" {...props} />
   ),
   isEntryPoint: false,
   inputs: [

@@ -7,7 +7,6 @@ import React, { Fragment } from "react";
 import SaveButton from "./SaveButton";
 import ExecuteButton from "./ExecuteButton";
 import NavigationTabs from "./NavigationTabs";
-import PublishButton from "./PublishButton";
 import UnPublishButton from "./UnPublishButton";
 
 interface Props {
@@ -50,12 +49,7 @@ function Topbar({
           <Fragment>
             <ExecuteButton workflowId={workflowId} />
             {isPublished && <UnPublishButton workflowId={workflowId} />}
-            {!isPublished && (
-              <Fragment>
-                <SaveButton workflowId={workflowId} />
-                <PublishButton workflowId={workflowId} />
-              </Fragment>
-            )}
+            {!isPublished && <SaveButton workflowId={workflowId} />}
           </Fragment>
         )}
       </div>

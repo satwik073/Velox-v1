@@ -174,7 +174,7 @@ export async function getWorkflowExecutions(workflowId: string) {
       userId,
     },
     orderBy: {
-      createdAt: "asc",
+      createdAt: "desc",
     },
   });
 }

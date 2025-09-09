@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreVerticalIcon, TrashIcon } from "lucide-react";
+import { IconDots, IconTrash } from "@tabler/icons-react";
 import { Fragment, useState } from "react";
 import DeleteWorkflowDialog from "./DeleteWorkflowDialog";
 
@@ -30,25 +30,24 @@ function WorkflowActions({
       />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="sm">
-            <TooltipWrapper content="More actions">
-              <div className="flex items-center justify-center w-full h-full">
-                <MoreVerticalIcon size={18} />
-              </div>
-            </TooltipWrapper>
+          <Button 
+            variant="ghost" 
+            size="sm"
+            className="h-8 w-8 p-0 hover:bg-[#1a1d21] dark:hover:bg-[#1a1d21] hover:bg-muted/50 hover:text-[#eef1f5] dark:hover:text-[#eef1f5] hover:text-foreground text-[#cccccc] dark:text-[#cccccc] text-muted-foreground"
+          >
+            <IconDots className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
-          <DropdownMenuSeparator />
+        <DropdownMenuContent align="end" className="bg-[#1a1d21] dark:bg-[#1a1d21] bg-background border-[#27282b] dark:border-[#27282b] border-border">
+          <DropdownMenuLabel className="text-[#eef1f5] dark:text-[#eef1f5] text-foreground">Actions</DropdownMenuLabel>
+          <DropdownMenuSeparator className="bg-[#27282b] dark:bg-[#27282b] bg-border" />
           <DropdownMenuItem
-            className="text-destructive flex items-center gap-2"
+            className="text-[#eef1f5] dark:text-[#eef1f5] text-foreground hover:bg-[#22222f] dark:hover:bg-[#22222f] hover:bg-muted/50 hover:text-[#eef1f5] dark:hover:text-[#eef1f5] hover:text-foreground flex items-center gap-2"
             onSelect={() => {
               setShowDeleteDialog((prev) => !prev);
             }}
           >
-            <TrashIcon size={18} />
+            <IconTrash size={18} />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

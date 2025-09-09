@@ -1,11 +1,11 @@
 import { TaskParamType, TaskType, WorkflowTask } from "@/lib/types";
-import { CodeIcon, Edit3Icon, LucideProps } from "lucide-react";
+import { Type, LucideProps } from "lucide-react";
 
 export const FillInputTask = {
   type: TaskType.FILL_INPUT,
   label: "Fill Input",
   icon: (props: LucideProps) => (
-    <Edit3Icon className="stroke-orange-400" {...props} />
+    <Type className="stroke-green-400" {...props} />
   ),
   isEntryPoint: false,
   inputs: [

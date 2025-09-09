@@ -25,8 +25,8 @@ function PublishButton({ workflowId }: { workflowId: string }) {
 
   return (
     <Button
-      variant={"outline"}
-      className="flex items-center gap-2"
+      className="bg-[#266DF0] border-[1.5px] border-[#407bf2] text-[14px] font-normal py-2 px-4 h-[28px] rounded-[8px] flex items-center gap-2"
+      style={{padding: '4px 8px 4px 6px'}}
       disabled={mutation.isError}
       onClick={() => {
         const plan = generateExecutionPlan();
@@ -38,7 +38,7 @@ function PublishButton({ workflowId }: { workflowId: string }) {
         });
       }}
     >
-      <UploadIcon size={16} className="stroke-green-400" /> Publish
+      <UploadIcon size={16} className="stroke-white" /> Publish
     </Button>
   );
 }

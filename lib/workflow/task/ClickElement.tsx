@@ -1,11 +1,11 @@
 import { TaskParamType, TaskType, WorkflowTask } from "@/lib/types";
-import { LucideProps, MousePointerClick } from "lucide-react";
+import { LucideProps, MousePointer } from "lucide-react";
 
 export const ClickElementTask = {
   type: TaskType.CLICK_ELEMENT,
   label: "Click Element",
   icon: (props: LucideProps) => (
-    <MousePointerClick className="stroke-orange-400" {...props} />
+    <MousePointer className="stroke-purple-400" {...props} />
   ),
   isEntryPoint: false,
   inputs: [

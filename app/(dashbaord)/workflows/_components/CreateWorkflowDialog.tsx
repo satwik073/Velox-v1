@@ -4,6 +4,7 @@ import { createWorkflow } from "@/actions/workflows";
 import CustomDialogHeader from "@/components/CustomDialogHeader";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {IconPlus} from "@tabler/icons-react"
 import {
   Form,
   FormControl,
@@ -60,7 +61,10 @@ function CreateWorkflowDialog({ triggeredText }: { triggeredText?: string }) {
       }}
     >
       <DialogTrigger asChild>
-        <Button>{triggeredText ?? "Create workflow"}</Button>
+        <Button className="bg-[#266DF0] border-[1.5px] border-[#407bf2] text-[14px] font-normal py-2 px-4 h-[28px] rounded-[8px]" style={{padding: '4px 8px 4px 6px'}}>
+          <IconPlus/>
+          {triggeredText ?? "New workflow"}
+        </Button>
       </DialogTrigger>
       <DialogContent className="px-0">
         <CustomDialogHeader

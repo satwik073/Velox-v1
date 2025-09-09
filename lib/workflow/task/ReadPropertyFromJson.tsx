@@ -1,11 +1,11 @@
 import { TaskParamType, TaskType, WorkflowTask } from "@/lib/types";
-import { FileJson2Icon, LucideProps } from "lucide-react";
+import { Database, LucideProps } from "lucide-react";
 
 export const ReadPropertyFromJsonTask = {
   type: TaskType.READ_PROPERTY_FROM_JSON,
   label: "Read property from JSON",
   icon: (props: LucideProps) => (
-    <FileJson2Icon className="stroke-orange-400" {...props} />
+    <Database className="stroke-indigo-400" {...props} />
   ),
   isEntryPoint: false,
   inputs: [
