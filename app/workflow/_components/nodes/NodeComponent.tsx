@@ -9,7 +9,7 @@ import NodeOutput from "./params/NodeOutput";
 import NodeIO from "./NodeIO";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Eye, EyeOff, Database, Maximize2 } from "lucide-react";
+import { Eye, EyeOff, Database, Maximize2, Clock, Activity, ChevronDown, ChevronUp } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
